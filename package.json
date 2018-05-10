@@ -1,0 +1,26 @@
+{
+  "name": "aliyun-oss-deploy",
+  "version": "0.0.1",
+  "description": "An aliyun oss deploy tool, putObject and stream are all supported.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hustcc/aliyun-oss-deploy.git"
+  },
+  "keywords": [
+    "aliyun",
+    "oss",
+    "aliyun-oss",
+    "deploy",
+    "cd"
+  ],
+  "author": "hustcc",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hustcc/aliyun-oss-deploy/issues"
+  },
+  "homepage": "https://github.com/hustcc/aliyun-oss-deploy#readme"
+}

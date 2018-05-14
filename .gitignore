@@ -2,3 +2,6 @@ node_modules/
 npm-debug.*
 .idea
 coverage
+_test
+.aliossrc
+test.js

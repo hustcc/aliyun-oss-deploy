@@ -1,9 +1,7 @@
 # aliyun-oss-deploy
 
-> 一个用于部署静态资源到 aliyun oss 的模块，支持 putObject 和 stream。可以代码方式或者 cli 方式调用！
+> 一个用于部署静态资源到 aliyun oss 的模块，支持 putObject 和 putStream。可以代码方式或者 cli 方式调用！
 
-[![Build Status](https://travis-ci.org/hustcc/aliyun-oss-deploy.svg?branch=master)](https://travis-ci.org/hustcc/aliyun-oss-deploy)
-[![Coverage Status](https://coveralls.io/repos/github/hustcc/aliyun-oss-deploy/badge.svg?branch=master)](https://coveralls.io/github/hustcc/aliyun-oss-deploy)
 [![npm](https://img.shields.io/npm/v/aliyun-oss-deploy.svg)](https://www.npmjs.com/package/aliyun-oss-deploy)
 [![npm](https://img.shields.io/npm/dm/aliyun-oss-deploy.svg)](https://www.npmjs.com/package/aliyun-oss-deploy)
 
@@ -22,17 +20,31 @@ npm i --save-dev aliyun-oss-deploy
 ```js
 const deploy = require('aliyun-oss-deploy');
 
-deploy(path, ossConfig);
+deploy(path, ossConfig[, prefix, byStream]);
 ```
+
+**注意**：prefix 用来配置资源版本号比较合适，默认为空；byStream 默认为 false，表示使用 putObject 方法！
 
 
  - CLI 方式
 
 ```bash
-aliyun-oss-deploy -p ./dist -c .aliossrc
+aliyun-oss-deploy -p ./dist -c .aliossrc -d static
 ```
 
-> 其中 -p c 参数是指定 oss 配置文件路径，不传则默认为当前目录的 `.aliossrc` 文件。
+帮助文档：
+
+```bash
+aliyun-oss-deploy --help
+Options:
+  --version        Show version number           [boolean]
+  -p, --filePath   Set your upload files path     [string]
+  -d, --prefix     Set the target dir of upload   [string]
+  -c, --aliossrc   Set your .aliossrc file path   [string]
+  -s, --useStream  Upload file by putStream      [boolean]
+  --help           Show help                     [boolean]
+```
+
 
 可以在 package.json 中直接使用
 
@@ -56,11 +68,12 @@ aliyun-oss-deploy -p ./dist -c .aliossrc
 {
   "accessKeyId": "your accessKeyId",
   "accessKeySecret": "your accessKeySecret",
-  "endpoint": "your endpoint",
-  "bucket": "your bucket",
-  "bucketPath": "your bucketPath"
+  "region": "your region",
+  "bucket": "your bucket"
 }
 ```
+
+**注意**：`region` 是区分 endpoint 的区域分类。
 
 
 ## License

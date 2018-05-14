@@ -1,10 +1,13 @@
 {
   "name": "aliyun-oss-deploy",
-  "version": "0.0.1",
-  "description": "An aliyun oss deploy tool, putObject and stream are all supported.",
+  "version": "0.1.0",
+  "description": "An aliyun oss deploy tool, putObject and putStream are all supported.",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "aliyun-oss-deploy": "bin/index.js"
   },
   "repository": {
     "type": "git",
@@ -22,5 +25,13 @@
   "bugs": {
     "url": "https://github.com/hustcc/aliyun-oss-deploy/issues"
   },
-  "homepage": "https://github.com/hustcc/aliyun-oss-deploy#readme"
+  "homepage": "https://github.com/hustcc/aliyun-oss-deploy#readme",
+  "dependencies": {
+    "ali-oss": "^5.2.0",
+    "assert": "^1.4.1",
+    "co": "^4.6.0",
+    "globby": "^8.0.1",
+    "ink": "^0.5.0",
+    "yargs": "^11.0.0"
+  }
 }

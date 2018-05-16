@@ -24,11 +24,15 @@ module.exports = class Deploy extends Component {
       return h(
         'div',
         {},
-        h(
-          Color,
-          props,
+        [
+          h(
+            Color,
+            props,
+            '*',
+          ),
+          ' ',
           r.url,
-        )
+        ]
       );
     })
   }

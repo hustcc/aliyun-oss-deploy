@@ -4,6 +4,7 @@
  */
 
 const { h, render, Component, Color } = require('ink');
+const Link = require('ink-link');
 
 module.exports = class Deploy extends Component {
   constructor(props) {
@@ -15,7 +16,38 @@ module.exports = class Deploy extends Component {
     };
   }
 
-  render() {
+  fileList() {
+    const { results } = this.state;
+
+    return results.map(r => {
+      const props = (r.res && r.res.status === 200) ? { green: true } : { red: true };
+      return h(
+        'div',
+        {},
+        h(
+          Color,
+          props,
+          r.url,
+        )
+      );
+    })
+  }
+
+  poweredBy() {
+    return h(
+      'div',
+      {},
+      [
+        'Powered by ',
+        h(Link, {
+          url: 'https://github.com/hustcc/aliyun-oss-deploy'
+        }, 'aliyun-oss-deploy'),
+        '.'
+      ]
+    );
+  }
+
+  count() {
     const { results } = this.state;
     const success = results.filter(r => r && r.res && (r.res.status === 200)).length;
     const error = results.length - success;
@@ -35,7 +67,21 @@ module.exports = class Deploy extends Component {
           Color,
           { red: true },
           `${error} fail.`,
-        )
+        ),
+      ]
+    );
+  }
+
+  render() {
+    // 显示成功个数
+    return h(
+      'div',
+      {},
+      [
+        this.fileList(),
+        '\n',
+        this.count(),
+        this.poweredBy(),
       ]
     );
   }
@@ -53,7 +99,7 @@ module.exports = class Deploy extends Component {
     }
     setTimeout(() => {
       onExit();
-    }, 10);
+    }, 100);
   }
 
   componentDidMount() {
@@ -61,6 +107,5 @@ module.exports = class Deploy extends Component {
   }
 
   componentWillUnmount() {
-    clearInterval(this.timer);
   }
 };

@@ -26,7 +26,7 @@ const argv = require('yargs')
     alias: 'prefix',
   })
   .option('c', {
-    describe: 'Set your .aliossrc file path',
+    describe: 'Set your .aliossrc file path or JSON string',
     type: 'string',
     alias: 'aliossrc',
   })
@@ -42,11 +42,17 @@ const argv = require('yargs')
 assert(argv.filePath, 'argv -p should be required');
 
 // oss 配置文件
-const aliossrc = argv.aliossrc && path.resolve(argv.aliossrc) || path.join(process.cwd(), '.aliossrc');
+const aliossrc = argv.aliossrc ? path.resolve(argv.aliossrc) : path.join(process.cwd(), '.aliossrc');
 
-const ossConfig = JSON.parse(fs.readFileSync(aliossrc, {
-  encoding: 'utf8',
-}));
+let ossConfig;
+// 文件存在则直接读取
+if (fs.existsSync(aliossrc)) {
+  ossConfig = JSON.parse(fs.readFileSync(aliossrc, {
+    encoding: 'utf8',
+  }));
+} else {
+  ossConfig = JSON.parse(argv.aliossrc);
+}
 
 // 校验配置
 assert(ossConfig.region, `region is required in ${aliossrc}`);

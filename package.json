@@ -1,6 +1,6 @@
 {
   "name": "aliyun-oss-deploy",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "An aliyun oss deploy tool, putObject and putStream are all supported.",
   "main": "index.js",
   "scripts": {
@@ -30,6 +30,7 @@
     "ali-oss": "^5.2.0",
     "assert": "^1.4.1",
     "co": "^4.6.0",
+    "figures": "^2.0.0",
     "globby": "^8.0.1",
     "ink": "^0.5.0",
     "ink-link": "^0.2.0",

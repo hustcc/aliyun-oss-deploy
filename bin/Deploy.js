@@ -5,6 +5,7 @@
 
 const { h, render, Component, Color } = require('ink');
 const Link = require('ink-link');
+const figures = require('figures');
 
 module.exports = class Deploy extends Component {
   constructor(props) {
@@ -20,7 +21,9 @@ module.exports = class Deploy extends Component {
     const { results } = this.state;
 
     return results.map(r => {
-      const props = (r.res && r.res.status === 200) ? { green: true } : { red: true };
+      const isSuccess = r.res && r.res.status === 200;
+      const props = isSuccess ? { green: true } : { red: true };
+      const text = isSuccess ? figures.tick : figures.cross;
       return h(
         'div',
         {},
@@ -28,7 +31,7 @@ module.exports = class Deploy extends Component {
           h(
             Color,
             props,
-            '*',
+            text,
           ),
           ' ',
           r.url,

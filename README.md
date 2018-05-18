@@ -5,7 +5,7 @@
 [![npm](https://img.shields.io/npm/v/aliyun-oss-deploy.svg)](https://www.npmjs.com/package/aliyun-oss-deploy)
 [![npm](https://img.shields.io/npm/dm/aliyun-oss-deploy.svg)](https://www.npmjs.com/package/aliyun-oss-deploy)
 
-![image](https://user-images.githubusercontent.com/7856674/39998106-a1fba014-57b7-11e8-8c15-3dc662bd5a10.png)
+![image](https://user-images.githubusercontent.com/7856674/40217123-aa5df822-5a9d-11e8-8b2d-5488967e3fcc.png)
 
 ## Install
 

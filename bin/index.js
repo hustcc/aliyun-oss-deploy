@@ -2,11 +2,9 @@
 
 const fs = require('fs');
 const path = require('path');
-const { h, render } = require('ink');
-const assert = require('assert');
 
-const DeployComponent = require('./Deploy.js');
-
+const assert = require('./assert');
+const log = require('./log.js');
 const deploy = require('../index.js');
 
 const deployGenerator = deploy.deployGenerator;
@@ -39,35 +37,32 @@ const argv = require('yargs')
   .argv;
 
 // 校验路径
-assert(argv.filePath, 'argv -p should be required');
+assert(argv.filePath, 'argv -p should be required.');
 
 // oss 配置文件
 const aliossrc = argv.aliossrc ? path.resolve(argv.aliossrc) : path.join(process.cwd(), '.aliossrc');
 
 let ossConfig;
 // 文件存在则直接读取
-if (fs.existsSync(aliossrc)) {
-  ossConfig = JSON.parse(fs.readFileSync(aliossrc, {
-    encoding: 'utf8',
-  }));
-} else {
-  ossConfig = JSON.parse(argv.aliossrc);
+try {
+  if (fs.existsSync(aliossrc)) {
+    ossConfig = JSON.parse(fs.readFileSync(aliossrc, {
+      encoding: 'utf8',
+    }));
+  } else {
+    ossConfig = JSON.parse(argv.aliossrc);
+  }
+} catch (e) {
+  assert(false, `ossConfig '${aliossrc}' is not a valid JSON file.`)
 }
 
+
 // 校验配置
-assert(ossConfig.region, `region is required in ${aliossrc}`);
-assert(ossConfig.accessKeyId, `accessKeyId is required in ${aliossrc}`);
-assert(ossConfig.accessKeySecret, `accessKeySecret is required in ${aliossrc}`);
-assert(ossConfig.bucket, `bucket is required in ${aliossrc}`);
+assert(ossConfig.region, `region is required in ${aliossrc}.`);
+assert(ossConfig.accessKeyId, `accessKeyId is required in ${aliossrc}.`);
+assert(ossConfig.accessKeySecret, `accessKeySecret is required in ${aliossrc}.`);
+assert(ossConfig.bucket, `bucket is required in ${aliossrc}.`);
 
 const dg = deployGenerator(argv.filePath, ossConfig, argv.prefix, argv.useStream);
 
-let unmount;
-
-const onExit = () => {
-  unmount();
-  process.exit(0);
-};
-
-// render ink component
-unmount = render(h(DeployComponent, { dg, onExit }));
+log(dg);

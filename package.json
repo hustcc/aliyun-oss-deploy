@@ -4,7 +4,9 @@
   "description": "An aliyun oss deploy tool, putObject and putStream are all supported.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "bin": {
     "aliyun-oss-deploy": "bin/index.js"
@@ -33,6 +35,8 @@
     "figures": "^2.0.0",
     "globby": "^8.0.1",
     "terminal-link": "^1.3.0",
-    "yargs": "^11.0.0"
-  }
+    "yargs": "^11.0.0",
+    "snyk": "^1.230.5"
+  },
+  "snyk": true
 }
